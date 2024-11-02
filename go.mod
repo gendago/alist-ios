@@ -1,6 +1,8 @@
 module github.com/alist-org/alist/v3
 
-go 1.23.4
+go 1.24.0
+
+toolchain go1.24.9
 
 require (
 	github.com/Azure/azure-sdk-for-go/sdk/azcore v1.17.0
@@ -70,10 +72,10 @@ require (
 	github.com/xhofe/wopan-sdk-go v0.1.3
 	github.com/yeka/zip v0.0.0-20231116150916-03d6312748a9
 	github.com/zzzhr1990/go-common-entity v0.0.0-20221216044934-fd1c571e3a22
-	golang.org/x/crypto v0.36.0
+	golang.org/x/crypto v0.43.0
 	golang.org/x/exp v0.0.0-20240904232852-e7e105dedf7e
-	golang.org/x/image v0.19.0
-	golang.org/x/net v0.38.0
+	golang.org/x/image v0.32.0
+	golang.org/x/net v0.46.0
 	golang.org/x/oauth2 v0.22.0
 	golang.org/x/time v0.8.0
 	google.golang.org/appengine v1.6.8
@@ -98,6 +100,8 @@ require (
 	github.com/emersion/go-textwrapper v0.0.0-20200911093747-65d896831594 // indirect
 	github.com/emersion/go-vcard v0.0.0-20230815062825-8fda7d206ec9 // indirect
 	github.com/relvacode/iso8601 v1.3.0 // indirect
+	golang.org/x/mobile v0.0.0-20251021151156-188f512ec823 // indirect
+	golang.org/x/mod v0.29.0 // indirect
 )
 
 require (
@@ -266,11 +270,11 @@ require (
 	github.com/yusufpapurcu/wmi v1.2.4 // indirect
 	go.etcd.io/bbolt v1.3.8 // indirect
 	golang.org/x/arch v0.8.0 // indirect
-	golang.org/x/sync v0.12.0
-	golang.org/x/sys v0.31.0 // indirect
-	golang.org/x/term v0.30.0 // indirect
-	golang.org/x/text v0.23.0
-	golang.org/x/tools v0.24.0 // indirect
+	golang.org/x/sync v0.17.0
+	golang.org/x/sys v0.37.0 // indirect
+	golang.org/x/term v0.36.0 // indirect
+	golang.org/x/text v0.30.0
+	golang.org/x/tools v0.38.0 // indirect
 	google.golang.org/api v0.169.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240604185151-ef581f913117 // indirect
 	google.golang.org/grpc v1.66.0
@@ -287,3 +291,7 @@ replace github.com/ProtonMail/go-proton-api => github.com/henrybear327/go-proton
 replace github.com/cronokirby/saferith => github.com/Da3zKi7/saferith v0.33.0-fixed
 
 replace github.com/SheltonZhu/115driver => github.com/okatu-loli/115driver v1.1.2
+
+replace github.com/shoenig/go-m1cpu => ./go-m1cpu
+
+replace github.com/shirou/gopsutil/v3 => ./gopsutil
