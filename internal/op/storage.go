@@ -338,3 +338,7 @@ func GetBalancedStorage(path string) driver.Driver {
 		return storages[i]
 	}
 }
+
+func ClearStorageCache() {
+	storagesMap.Clear()
+}

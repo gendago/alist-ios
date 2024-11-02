@@ -64,8 +64,8 @@ require (
 	github.com/zzzhr1990/go-common-entity v0.0.0-20221216044934-fd1c571e3a22
 	golang.org/x/crypto v0.30.0
 	golang.org/x/exp v0.0.0-20240904232852-e7e105dedf7e
-	golang.org/x/image v0.19.0
-	golang.org/x/net v0.28.0
+	golang.org/x/image v0.23.0
+	golang.org/x/net v0.32.0
 	golang.org/x/oauth2 v0.22.0
 	golang.org/x/time v0.8.0
 	google.golang.org/appengine v1.6.8
@@ -92,6 +92,8 @@ require (
 	github.com/ipfs/boxo v0.12.0 // indirect
 	github.com/jackc/puddle/v2 v2.2.1 // indirect
 	github.com/taruti/bytepool v0.0.0-20160310082835-5e3a9ea56543 // indirect
+	golang.org/x/mobile v0.0.0-20241213221354-a87c1cf6cf46 // indirect
+	golang.org/x/mod v0.22.0 // indirect
 )
 
 require (
@@ -229,7 +231,7 @@ require (
 	golang.org/x/sys v0.28.0 // indirect
 	golang.org/x/term v0.27.0 // indirect
 	golang.org/x/text v0.21.0 // indirect
-	golang.org/x/tools v0.24.0 // indirect
+	golang.org/x/tools v0.28.0 // indirect
 	google.golang.org/api v0.169.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240604185151-ef581f913117 // indirect
 	google.golang.org/grpc v1.66.0
@@ -240,3 +242,7 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	lukechampine.com/blake3 v1.1.7 // indirect
 )
+
+replace github.com/shoenig/go-m1cpu => ./go-m1cpu
+
+replace github.com/shirou/gopsutil/v3 => ./gopsutil
