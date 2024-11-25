@@ -3,6 +3,7 @@ package alistlib
 import (
 	"github.com/alist-org/alist/v3/cmd"
 	"github.com/alist-org/alist/v3/cmd/flags"
+	"github.com/alist-org/alist/v3/internal/conf"
 	"github.com/alist-org/alist/v3/internal/op"
 	"github.com/alist-org/alist/v3/pkg/utils"
 	"github.com/alist-org/alist/v3/server/common"
@@ -71,4 +72,8 @@ func GetAdminToken() (t string) {
 		return
 	}
 	return token
+}
+
+func GetVersion() (version string) {
+	return conf.Version
 }
