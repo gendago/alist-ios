@@ -74,6 +74,15 @@ func listenAndServe(t string, srv *http.Server) {
 	}
 }
 
+func listenAndServeTLS(t string, srv *http.Server) {
+	err := srv.ListenAndServeTLS(conf.Conf.Scheme.CertFile, conf.Conf.Scheme.KeyFile)
+	if err != nil && err != http.ErrServerClosed {
+		event.OnStartError(t, err.Error())
+	} else {
+		event.OnShutdown(t)
+	}
+}
+
 func IsRunning(t string) bool {
 	switch t {
 	case "http":
@@ -138,7 +147,7 @@ func Start(dataChangeCallback DataChangeCallback) {
 		utils.Log.Infof("start HTTPS server @ %s", httpsBase)
 		httpsSrv = &http.Server{Addr: httpsBase, Handler: r}
 		go func() {
-			listenAndServe("https", httpsSrv)
+			listenAndServeTLS("https", httpsSrv)
 			httpsSrv = nil
 		}()
 	}
