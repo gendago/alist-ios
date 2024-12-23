@@ -50,7 +50,11 @@ func Backup() string {
 	return string(jsonData)
 }
 
+var Restoring bool = false
+
 func Restore(jsonData string) {
+	Restoring = true
+
 	db := db.GetDb()
 	var data map[string]json.RawMessage
 
@@ -83,11 +87,13 @@ func Restore(jsonData string) {
 	if storagesData, ok := data["storages"]; ok {
 		var storages []model.Storage
 		if err := json.Unmarshal(storagesData, &storages); err == nil {
+			// 清空Storage表
+			if err := db.Where("1 = 1").Delete(&model.Storage{}).Error; err != nil {
+				log.Printf("Error clearing storages table: %v", err)
+			}
+			// 覆盖更新
 			for _, storage := range storages {
-				err := db.Clauses(clause.OnConflict{
-					Columns:   []clause.Column{{Name: "id"}},
-					UpdateAll: true,
-				}).Create(&storage).Error
+				err := db.Create(&storage).Error
 				if err != nil {
 					log.Printf("Error restoring storages: %v", err)
 				}
@@ -130,4 +136,6 @@ func Restore(jsonData string) {
 			log.Printf("Error unmarshalling metas data: %v", err)
 		}
 	}
+
+	Restoring = false
 }
