@@ -181,7 +181,9 @@ func Start(dataChangeCallback DataChangeCallback) {
 	}
 
 	dispose, _ := eventbus.Subscribe[*model.DataChangeEvent]()(func(ctx context.Context, event *model.DataChangeEvent) error {
-		dataChangeCallback.OnChange(event.Model)
+		if !Restoring {
+			dataChangeCallback.OnChange(event.Model)
+		}
 		return nil
 	})
 	listener = dispose
