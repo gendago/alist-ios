@@ -86,51 +86,51 @@ func (u *User) SetPassword(pwd string) *User {
 }
 
 func (u *User) CanSeeHides() bool {
-	return u.Permission&1 == 1
+	return u.IsAdmin() || u.Permission&1 == 1
 }
 
 func (u *User) CanAccessWithoutPassword() bool {
-	return (u.Permission>>1)&1 == 1
+	return u.IsAdmin() || (u.Permission>>1)&1 == 1
 }
 
 func (u *User) CanAddOfflineDownloadTasks() bool {
-	return (u.Permission>>2)&1 == 1
+	return u.IsAdmin() || (u.Permission>>2)&1 == 1
 }
 
 func (u *User) CanWrite() bool {
-	return (u.Permission>>3)&1 == 1
+	return u.IsAdmin() || (u.Permission>>3)&1 == 1
 }
 
 func (u *User) CanRename() bool {
-	return (u.Permission>>4)&1 == 1
+	return u.IsAdmin() || (u.Permission>>4)&1 == 1
 }
 
 func (u *User) CanMove() bool {
-	return (u.Permission>>5)&1 == 1
+	return u.IsAdmin() || (u.Permission>>5)&1 == 1
 }
 
 func (u *User) CanCopy() bool {
-	return (u.Permission>>6)&1 == 1
+	return u.IsAdmin() || (u.Permission>>6)&1 == 1
 }
 
 func (u *User) CanRemove() bool {
-	return (u.Permission>>7)&1 == 1
+	return u.IsAdmin() || (u.Permission>>7)&1 == 1
 }
 
 func (u *User) CanWebdavRead() bool {
-	return (u.Permission>>8)&1 == 1
+	return u.IsAdmin() || (u.Permission>>8)&1 == 1
 }
 
 func (u *User) CanWebdavManage() bool {
-	return (u.Permission>>9)&1 == 1
+	return u.IsAdmin() || (u.Permission>>9)&1 == 1
 }
 
 func (u *User) CanFTPAccess() bool {
-	return (u.Permission>>10)&1 == 1
+	return u.IsAdmin() || (u.Permission>>10)&1 == 1
 }
 
 func (u *User) CanFTPManage() bool {
-	return (u.Permission>>11)&1 == 1
+	return u.IsAdmin() || (u.Permission>>11)&1 == 1
 }
 
 func (u *User) CanReadArchives() bool {
