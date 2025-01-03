@@ -9,7 +9,10 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"path/filepath"
+	"regexp"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/alist-org/alist/v3/alistlib/internal"
@@ -59,6 +62,7 @@ func Init(e Event, logCallback LogCallback) error {
 		utils.Log.ExitFunc = event.OnProcessExit
 		log.StandardLogger().ExitFunc = event.OnProcessExit
 	}
+	checkConfigJSON()
 	cmd.Init()
 	return nil
 }
@@ -234,4 +238,45 @@ func Shutdown(timeout int64) (err error) {
 	listener.Dispose()
 	//cmd.Release()
 	return nil
+}
+
+func checkConfigJSON() {
+	configPath := filepath.Join(flags.DataDir, "config.json")
+	// 检查 config.json 文件是否存在
+	if _, err := os.Stat(configPath); os.IsNotExist(err) {
+		utils.Log.Println("config.json does not exist in the provided path.")
+		return
+	}
+
+	// 读取 config.json 文件内容
+	content, err := os.ReadFile(configPath)
+	if err != nil {
+		utils.Log.Println("Failed to read config.json: %v\n", err)
+		return
+	}
+	contentStr := string(content)
+
+	// 检查文件中是否已是正确的路径
+	if strings.Contains(contentStr, flags.DataDir) {
+		utils.Log.Println("config.json already includes the correct path, no further actions taken.")
+		return
+	}
+
+	// 创建用于查找匹配路径模式的正则表达式
+	patternString := regexp.MustCompile(`[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}`).ReplaceAllString(flags.DataDir, `[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}`)
+	regexPattern, err := regexp.Compile(patternString)
+	if err != nil {
+		utils.Log.Println("Error compiling regex:", err)
+		return
+	}
+
+	// 替换 config.json 中的匹配内容为正确的路径
+	updatedContent := regexPattern.ReplaceAllString(contentStr, flags.DataDir)
+
+	// 将更新后的内容写回 config.json
+	if err = os.WriteFile(configPath, []byte(updatedContent), 0755); err != nil {
+		utils.Log.Println("Failed to write updated config.json: %v\n", err)
+		return
+	}
+	utils.Log.Println("Config.json has been successfully updated.")
 }
