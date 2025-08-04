@@ -20,12 +20,6 @@ type Database struct {
 	DSN         string `json:"dsn" env:"DSN"`
 }
 
-type Meilisearch struct {
-	Host        string `json:"host" env:"HOST"`
-	APIKey      string `json:"api_key" env:"API_KEY"`
-	IndexPrefix string `json:"index_prefix" env:"INDEX_PREFIX"`
-}
-
 type Scheme struct {
 	Address      string `json:"address" env:"ADDR"`
 	HttpPort     int    `json:"http_port" env:"HTTP_PORT"`
@@ -101,7 +95,6 @@ type Config struct {
 	JwtSecret             string      `json:"jwt_secret" env:"JWT_SECRET"`
 	TokenExpiresIn        int         `json:"token_expires_in" env:"TOKEN_EXPIRES_IN"`
 	Database              Database    `json:"database" envPrefix:"DB_"`
-	Meilisearch           Meilisearch `json:"meilisearch" envPrefix:"MEILISEARCH_"`
 	Scheme                Scheme      `json:"scheme"`
 	TempDir               string      `json:"temp_dir" env:"TEMP_DIR"`
 	BleveDir              string      `json:"bleve_dir" env:"BLEVE_DIR"`
@@ -142,9 +135,6 @@ func DefaultConfig() *Config {
 			Port:        0,
 			TablePrefix: "x_",
 			DBFile:      dbPath,
-		},
-		Meilisearch: Meilisearch{
-			Host: "http://localhost:7700",
 		},
 		BleveDir: indexDir,
 		Log: LogConfig{
