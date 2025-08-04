@@ -50,7 +50,6 @@ require (
 	github.com/kdomanski/iso9660 v0.4.0
 	github.com/larksuite/oapi-sdk-go/v3 v3.3.1
 	github.com/maruel/natural v1.1.1
-	github.com/meilisearch/meilisearch-go v0.27.2
 	github.com/mholt/archives v0.1.0
 	github.com/minio/sio v0.4.0
 	github.com/natefinch/lumberjack v2.0.0+incompatible
